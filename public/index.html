@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<title>Home</title>
+		<style>
+.top {
+    width: 100%;
+    height: 100px;
+}
+.left {
+	float:left;
+    width: 342px;
+}
+.clear {
+	clear: both;
+}
+
+.news {
+    width: calc(100% - 1024px);
+	padding:32px;
+    float: left;
+}
+
+.news header {
+	font-weight: bold;
+    margin-top: 32px;
+    font-size: larger;
+    margin-bottom: 16px;
+}
+
+.news section {
+	padding-left: 64px;
+}
+		</style>
+
+	</head>
+	<body>
+		<div class="top">
+			<a class="weatherwidget-io" href="https://forecast7.com/en/44d30n121d25/97756/?unit=us" data-label_1="Redmond" data-label_2="WEATHER" data-theme="weather_one"> WEATHER</a>
+		</div>
+		<div class="left">
+			<div class="clear"><img data-base="https://tripcheck.com/RoadCams/cams/US97 at SW 61st St S_pid4073.JPG" /></div>
+			<div class="clear"><img data-base="https://tripcheck.com/RoadCams/cams/Santiam%20Pass_pid2728.JPG" /></div>
+			<div class="clear"><img data-base="https://tripcheck.com/RoadCams/cams/Century%20Dr%20at%20MP%2021.11%20E_pid3545.JPG" /></div>
+		</div>
+
+		<div class="news">
+
+		</div>
+
+		<script>
+const reloadCams = ()=>{
+	Array.prototype.slice.call(document.getElementsByTagName("img")).forEach(ele=>{
+		if (!ele.dataset.base) return;
+		ele.src = ele.dataset.base+"?rand="+(new Date()).getTime()
+	})
+}
+
+setInterval(reloadCams, 60000)
+reloadCams()
+
+function __weatherwidget_init(){
+	var a=document.getElementsByClassName("weatherwidget-io"),i=[];
+	if(0!==a.length){
+		for(
+			var t=function(t){
+				var e=a[t],o={};
+				o.id="weatherwidget-io-"+t,
+				o.href=e.href,
+				o.label_1=e.getAttribute("data-label_1"),
+				o.label_2=e.getAttribute("data-label_2"),
+				o.theme=e.getAttribute("data-theme"),
+				(r=document.getElementById(o.id))&&e.removeChild(r),
+				i[o.id]=document.createElement("iframe"),
+				i[o.id].setAttribute("id",o.id),
+				i[o.id].setAttribute("class","weatherwidget-io-frame"),
+				i[o.id].setAttribute("title","Weather Widget"),
+				i[o.id].setAttribute("scrolling","no"),
+				i[o.id].setAttribute("frameBorder","0"),
+				i[o.id].setAttribute("width","100%"),
+				i[o.id].setAttribute("src","https://weatherwidget.io/w/"),
+				i[o.id].style.display="block",
+				i[o.id].style.position="absolute",
+				i[o.id].style.top="0",
+				i[o.id].onload=function(){
+					i[o.id].contentWindow.postMessage(o,"https://weatherwidget.io")
+				},
+				e.style.display="block",
+				e.style.position="relative",
+				e.style.height="150px",
+				e.style.padding="0",
+				e.style.overflow="hidden",
+				e.style.textAlign="left",
+				e.style.textIndent="-299rem",
+				e.appendChild(i[o.id])
+			},e=0,o=Math.min(a.length,10);e<o;e++){var r;t(e)}window.addEventListener("message",function(t){"https://weatherwidget.io"===t.origin&&i[t.data.wwId]&&i[t.data.wwId].parentNode&&(i[t.data.wwId].style.height=t.data.wwHeight+"px",i[t.data.wwId].parentNode.style.height=t.data.wwHeight+"px")})}
+			else setTimeout(__weatherwidget_init,1500)}
+			
+setTimeout(__weatherwidget_init,100);
+setInterval(__weatherwidget_init,600000);
+
+function htmlToElem(html) {
+  let temp = document.createElement('template');
+  html = html.trim(); // Never return a space text node as a result
+  temp.innerHTML = html;
+  return temp.content.firstChild;
+}
+
+
+const readNews = ()=>{
+	fetch("/news").then((res)=>(res.text())).then((body)=>{ 
+		document.getElementsByClassName("news")[0].replaceWith(htmlToElem(body))
+	})
+}
+
+readNews()
+setInterval(readNews,120000);
+		</script>
+	</body>
+</html>
