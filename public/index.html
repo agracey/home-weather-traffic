@@ -9,6 +9,8 @@
 .left {
 	float:left;
     width: 342px;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid red;
 }
 .clear {
 	clear: both;
@@ -22,13 +24,32 @@
 
 .news header {
 	font-weight: bold;
-    margin-top: 32px;
-    font-size: larger;
-    margin-bottom: 16px;
+  margin-top: 32px;
+  font-size: larger;
+  margin-bottom: 16px;
 }
 
 .news section {
 	padding-left: 64px;
+}
+
+.events {
+  width: 512px;
+	padding: 32px;
+  float: right;
+}
+
+.events header {
+	font-weight: bold;
+  margin-top: 32px;
+  font-size: larger;
+  float: none;
+  margin-bottom: 16px;
+}
+
+.events section {
+	text-transform: capitalize;
+	padding-left: 8px;
 }
 		</style>
 
@@ -44,6 +65,9 @@
 		</div>
 
 		<div class="news">
+
+		</div>
+		<div class="events">
 
 		</div>
 
@@ -113,7 +137,24 @@ const readNews = ()=>{
 }
 
 readNews()
-setInterval(readNews,120000);
+setInterval(readNews,1200000)
+
+function htmlToElem(html) {
+  let temp = document.createElement('template');
+  html = html.trim(); // Never return a space text node as a result
+  temp.innerHTML = html;
+  return temp.content.firstChild;
+}
+
+
+const readEvents = ()=>{
+	fetch("/events").then((res)=>(res.text())).then((body)=>{ 
+		document.getElementsByClassName("events")[0].replaceWith(htmlToElem(body))
+	})
+}
+
+readEvents()
+setInterval(readEvents,5000)
 		</script>
 	</body>
 </html>
