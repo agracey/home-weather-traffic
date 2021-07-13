@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r ./tracer.js index.js"
+    "start": "node -r ./tracer.js ./src/server.mjs"
   },
   "author": "",
   "license": "ISC",
@@ -19,8 +19,8 @@
     "@opentelemetry/node": "^0.23.0",
     "@opentelemetry/tracing": "^0.23.0",
     "express": "^4.17.1",
+    "ioredis": "^4.27.6",
     "newsapi": "^2.4.1",
-    "node-fetch": "^2.6.1",
-    "redis": "^3.1.2"
+    "node-fetch": "^2.6.1"
   }
 }
