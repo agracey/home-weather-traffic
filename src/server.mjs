@@ -1,10 +1,13 @@
 
 import Redis from 'ioredis'
 import NewsAPI from 'newsapi'
+import fetch from 'node-fetch'
 
 import { readFileSync } from 'fs'
 
 const newsapi_key = readFileSync('/services/newsapi/key', 'utf8')
+const weather_key = readFileSync('/services/weatherapi/key', 'utf8')
+const weather_city = readFileSync('/services/weatherapi/city', 'utf8')
 const redis_uri = readFileSync('/services/homecache/uri', 'utf8')
 
 console.log({newsapi_key, redis_uri})
@@ -16,11 +19,10 @@ const redis = new Redis(redis_uri)
 import express from 'express'
 
 
-
 const app = express()
 const port = process.env.PORT || 8080
 
-app.use(express.static('public'))
+app.use(express.static('client/build'))
 
 
 let news = []
@@ -36,11 +38,37 @@ const getNews = async () => {
   })
 }
 getNews()
-setInterval(getNews, 30*60*1000)
+//setInterval(getNews, 30*60*1000)
 
 app.get('/news', (req, res) => {
   res.send(news)
 })
+
+
+
+
+let weather = {}
+
+const lat = 44
+const long = -121
+
+const getWeather = async () => {
+  fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${weather_key}&units=imperial`).then((res)=>(res.json())).then(response => {
+    weather = response
+  }).catch((err)=>{
+    console.error('Weather Error: ', err)
+  })
+}
+getWeather()
+//setInterval(getWeather, 15*60*1000)
+
+
+app.get('/weather', (req, res) => {
+  res.send(weather)
+})
+
+
+
 
 app.get('/events', (req,res)=>{
 
@@ -53,6 +81,7 @@ app.get('/events', (req,res)=>{
 })
 
 app.listen(port, () => {
+  console.log(process.env)
   console.log(`Traffic app listening at http://localhost:${port}`)
 })
 

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r ./tracer.js ./src/server.mjs"
+    "start": "node -r ./tracer.js ./src/server.mjs",
+    "build-client": "cd client; npm i; npm run build; cd -;"
   },
   "author": "",
   "license": "ISC",

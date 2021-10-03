@@ -1,0 +1,147 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+.App {
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template: auto 318px / auto 984px;
+  grid-template-areas:
+    'news weather '
+    'news camera ';
+  grid-gap: 0px;
+
+}
+
+
+
+
+.NewsPane {
+  grid-area: news;
+  overflow: hidden;
+}
+
+.Headline,.NewsHeadLines {
+  width: 100%
+}
+
+.NewsHeadLines header {
+  font-weight: bolder;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.NewsHeadLines section {
+  font-weight: lighter;
+  overflow: hidden;
+  margin-left: 16px;
+}
+
+
+
+
+
+.WeatherPane {
+  grid-area: weather;
+  
+  display: grid;
+  grid-template: 1fr 1fr 1fr 1fr 1fr / 25% 25% 25% 25% ;
+  grid-template-areas:
+    'current hourly1 hourly2 hourly3 day1'
+    'current map map map day2'
+    'current map map map day3'
+    'current map map map day4';
+  grid-gap: 0px;
+}
+
+.CurrentWeather {
+  grid-area: current;
+}
+.Hourly1 {
+  grid-area: hourly1;
+}
+.Hourly2 {
+  grid-area: hourly2;
+}
+.Hourly3 {
+  grid-area: hourly3;
+}
+.Day1 {
+  grid-area: day1;
+}
+.Day2 {
+  grid-area: day2;
+}
+.Day3 {
+  grid-area: day3;
+}
+.Day4 {
+  grid-area: day4;
+}
+.WeatherMap {
+  grid-area: map;
+}
+
+.forecast {
+  border: hotpink 1px solid;
+}
+
+.TrafficPane {
+  /*318hx984w */
+  grid-area: camera;
+}
+
+.TrafficCameraContainer {
+  /*318hx328w */
+  float: left;
+}
