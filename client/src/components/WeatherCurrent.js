@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function CurrentWeather({url}) {
+function CurrentWeather({forecast}) {
 
   const tempHigh = 100
   const tempLow = 32
@@ -11,7 +11,7 @@ function CurrentWeather({url}) {
   const conditions = "Rain"
 
   return (
-    <div className="CurrentWeatherContainer">
+    <div className="CurrentWeather">
       <span className="temp">{tempHigh} / {tempLow}</span>
       <span className="conditions">{conditions}</span>
       <span className="wind">{wind} mph @{windDir}</span>

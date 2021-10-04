@@ -75,27 +75,27 @@ table {
   width: 100%
 }
 
-.NewsHeadLines header {
-  font-weight: bolder;
-  overflow: hidden;
-  margin-top: 16px;
-}
-
-.NewsHeadLines section {
+.HeadLine section {
   font-weight: lighter;
-  overflow: hidden;
-  margin-left: 16px;
+  margin-left: 32px;
+  margin-right: 64px;
+  overflow-wrap: break-word;
 }
 
-
-
+.Headline header {
+  margin-left: 16px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  font-weight: bolder;
+}
 
 
 .WeatherPane {
   grid-area: weather;
   
   display: grid;
-  grid-template: 1fr 1fr 1fr 1fr 1fr / 25% 25% 25% 25% ;
+  grid-template: 1fr 1fr 1fr 1fr/20% 20% 20% 20% 20% ;
   grid-template-areas:
     'current hourly1 hourly2 hourly3 day1'
     'current map map map day2'
@@ -134,7 +134,34 @@ table {
 
 .forecast {
   border: hotpink 1px solid;
+
+  display: grid;
+  grid-template: 1fr min-content 1fr / 2em auto 2em ;
+  grid-template-areas:
+    'temp temp temp'
+    'conditions conditions conditions'
+    'aqi wind humidity';
+  grid-gap: 0px;
 }
+
+.temp {
+  grid-area: temp;
+}
+.conditions {
+  grid-area: conditions;
+}
+.aqi {
+  grid-area: aqi;
+}
+.wind {
+  grid-area: wind;
+}
+.humidity {
+  grid-area: humidity;
+}
+
+
+
 
 .TrafficPane {
   /*318hx984w */

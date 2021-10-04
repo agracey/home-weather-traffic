@@ -11,7 +11,7 @@ function WeatherForecast({grid, forecast, name}) {
   const conditions = "Rain"
 
   return (
-    <div className="{grid} forecast">
+    <div className={grid+" forecast"}>
       <span className="temp">{tempHigh} / {tempLow}</span>
       <span className="conditions">{conditions}</span>
       <span className="wind">{wind} mph @{windDir}</span>
