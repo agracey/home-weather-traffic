@@ -1,12 +1,12 @@
 import React from "react";
 
-function Headline({header, text}) {
+function Headline({title, description}) {
   return (
     <div className="Headline">
-      <header> {header}
+      <header> {title}
       </header>
       <section>
-        {text}
+        {description}
       </section>
     </div>
   )
